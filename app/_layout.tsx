@@ -1,37 +1,64 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React from 'react';
+import { SplashScreen, Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+import "../global.css";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+
+  const [fontsLoaded, error] = useFonts({
+    //Poppins
+    "Poppins-Black": require("../assets/fonts/Poppins/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/Poppins/Poppins-ExtraBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/Poppins/Poppins-ExtraLight.ttf"),
+    "Poppins-Light": require("../assets/fonts/Poppins/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "Poppins-Thin": require("../assets/fonts/Poppins/Poppins-Thin.ttf"),
+    
+    //Roboto
+    "RobotoMono-BoldItalic": require("../assets/fonts/Roboto/RobotoMono-BoldItalic.ttf"),
+    "RobotoMono-Bold": require("../assets/fonts/Roboto/RobotoMono-Bold.ttf"),
+    "RobotoMono-ExtraLightItalic": require("../assets/fonts/Roboto/RobotoMono-ExtraLightItalic.ttf"),
+    "RobotoMono-ExtraLight": require("../assets/fonts/Roboto/RobotoMono-ExtraLight.ttf"),
+    "RobotoMono-Italic": require("../assets/fonts/Roboto/RobotoMono-Italic.ttf"),
+    "RobotoMono-ItalicVariable": require("../assets/fonts/Roboto/RobotoMono-Italic-VariableFont_wght.ttf"),
+    "RobotoMono-LightItalic": require("../assets/fonts/Roboto/RobotoMono-LightItalic.ttf"),
+    "RobotoMono-Light": require("../assets/fonts/Roboto/RobotoMono-Light.ttf"),
+    "RobotoMono-MediumItalic": require("../assets/fonts/Roboto/RobotoMono-MediumItalic.ttf"),
+    "RobotoMono-Medium": require("../assets/fonts/Roboto/RobotoMono-Medium.ttf"),
+    "RobotoMono-Regular": require("../assets/fonts/Roboto/RobotoMono-Regular.ttf"),
+    "RobotoMono-SemiBoldItalic": require("../assets/fonts/Roboto/RobotoMono-SemiBoldItalic.ttf"),
+    "RobotoMono-SemiBold": require("../assets/fonts/Roboto/RobotoMono-SemiBold.ttf"),
+    "RobotoMono-ThinItalic": require("../assets/fonts/Roboto/RobotoMono-ThinItalic.ttf"),
+    "RobotoMono-Thin": require("../assets/fonts/Roboto/RobotoMono-Thin.ttf"),
+    "RobotoMono-Variable": require("../assets/fonts/Roboto/RobotoMono-VariableFont_wght.ttf"),
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (error) throw error;
+
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded, error]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if (!fontsLoaded && !error) {
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index"/>
+    </Stack>
   );
 }
