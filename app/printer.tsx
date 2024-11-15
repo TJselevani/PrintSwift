@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Alert, StatusBar } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert, StatusBar, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ThermalPrinter from 'react-native-thermal-printer'; 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { PrinterDevice } from '../constants/types'; 
 import { Link } from 'expo-router';
-// import BluetoothStateManager from 'react-native-bluetooth-state-manager';
+import BluetoothStateManager from 'react-native-bluetooth-state-manager';
+import { useTheme } from '@/components/MyThemeProvider';
+import { darkTheme, lightTheme } from '@/constants/themes';
 
 const PrinterSettingsScreen: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+  const currentTheme = theme === 'light' ? lightTheme : darkTheme;
+  
   const [printers, setPrinters] = useState<PrinterDevice[]>([]);
   const [selectedPrinter, setSelectedPrinter] = useState<string | null>(null);
 
@@ -30,13 +35,13 @@ const PrinterSettingsScreen: React.FC = () => {
       }
     };
 
-    // BluetoothStateManager.getState().then((state) => {
-    //   if (state !== 'PoweredOn') {
-    //     Alert.alert('Bluetooth is not enabled', 'Please enable Bluetooth to continue.');
-    //   } else {
-    //     fetchPrinters();
-    //   }
-    // });
+    BluetoothStateManager.getState().then((state) => {
+      if (state !== 'PoweredOn') {
+        Alert.alert('Bluetooth is not enabled', 'Please enable Bluetooth to continue.');
+      } else {
+        fetchPrinters();
+      }
+    });
 
   }, []);
   
@@ -56,6 +61,11 @@ const PrinterSettingsScreen: React.FC = () => {
   return (
     <SafeAreaView className="flex-1 bg-primary p-4">
       {/* <Text className="text-4xl font-bold text-center mb-4 color-gray-200">Available Printers</Text> */}
+      <View style={[{ backgroundColor: currentTheme.backgroundColor }]}>
+        <Text style={{ color: currentTheme.textColor }}>Hello, {theme} mode!</Text>
+        <Button title="Toggle Theme" onPress={toggleTheme} />
+      </View>
+
       <StatusBar barStyle="light-content" />
       <View className="flex-row justify-between items-center mt-6 mb-10">
         <Text></Text>

@@ -5,30 +5,44 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#111111",//"#1d1918",//"#161622",
+        // Light theme colors
+        light: {
+          primary: "#ffffff", // Light background
+          secondary: "#f0f0f0", // Light secondary color
+          text: "#000000", // Light text color
+          border: "#e5e5e5", // Light border color
+          button: "#ff9c01", // Light button color
+        },
+        // Dark theme colors
+        dark: {
+          primary: "#111111", // Dark background
+          secondary: "#1d1d1d", // Dark secondary color
+          text: "#ffffff", // Dark text color
+          border: "#343434", // Dark border color
+          button: "#ff9c01", // Dark button color
+        },
+        // Additional colors (neutral, gray, etc.)
+        gray: {
+          DEFAULT: "#212529",
+          100: "#CDCDE0",
+          200: "#343a40",
+          300: "#495057",
+        },
+        black: {
+          DEFAULT: "#000000",
+          100: "#1E1E2D",
+          200: "#232533",
+        },
         secondary: {
-          DEFAULT: "#948c94", 
+          DEFAULT: "#948c94",
           100: "#40473b",
           200: "#292524",
           300: "#5c545c",
         },
         maroon: "#8f080f",
         darkMaroon: "#350d0e",
-        black: {
-          DEFAULT: "#000",
-          100: "#1E1E2D",
-          200: "#232533",
-        },
-        gray: {
-          DEFAULT: "#212529",
-          100: "#CDCDE0",
-          200: "#343a40",
-          300: "#495057",
-          
-        },
       },
       fontFamily: {
-        //Poppins
         pthin: ["Poppins-Thin", "sans-serif"],
         pextralight: ["Poppins-ExtraLight", "sans-serif"],
         plight: ["Poppins-Light", "sans-serif"],

@@ -3,6 +3,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import "../global.css";
+import { MyThemeProvider } from '@/components/MyThemeProvider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -57,8 +58,20 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index"/>
-    </Stack>
+    <MyThemeProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index"/>
+      </Stack>
+    </MyThemeProvider>
   );
 }
+
+// android/app/build.gradle
+// ndk {
+//   abiFilters "armeabi-v7a", "arm64-v8a"  // Include both 32-bit and 64-bit support
+// }
+// externalNativeBuild {
+//   cmake {
+//       cppFlags "-std=c++17"
+//   }
+// }
