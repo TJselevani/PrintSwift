@@ -15,5 +15,6 @@
         "pthin",
         "tailwindcss",
         "tanstack"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

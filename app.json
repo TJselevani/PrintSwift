@@ -4,7 +4,7 @@
     "slug": "PrintSwift",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/appicon/playstore.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tjselevani.PrintSwift"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/appicon/playstore.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.tjselevani.PrintSwift"
     },
     "web": {
       "bundler": "metro",
