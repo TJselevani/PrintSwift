@@ -7,7 +7,11 @@ interface LoadingWidgetProps {
   style?: object;
 }
 
-const LoadingWidget: React.FC<LoadingWidgetProps> = ({ size = 'large', color = '#0000ff', style = {} }) => {
+const LoadingWidget: React.FC<LoadingWidgetProps> = ({
+  size = 'large',
+  color = '#0000ff',
+  style = {},
+}) => {
   return (
     <View style={[styles.container, style]}>
       <ActivityIndicator size={size} color={color} />

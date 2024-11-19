@@ -5,28 +5,27 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#111111",//"#1d1918",//"#161622",
-        secondary: {
-          DEFAULT: "#948c94", 
-          100: "#40473b",
-          200: "#292524",
-          300: "#5c545c",
-        },
-        maroon: "#8f080f",
-        darkMaroon: "#350d0e",
-        black: {
-          DEFAULT: "#000",
-          100: "#1E1E2D",
-          200: "#232533",
-        },
+        lightBackground: "#ffffff",
+        darkBackground: "#161622",
+        containerLightBackground: "#a6a6a5",
+        containerDarkBackground: "#201f2f",
+        primary: "#111111",
+        secondary: "#1d1918",
+        green: "#245501",
+        red: "#cb310b",
         gray: {
           DEFAULT: "#212529",
           100: "#CDCDE0",
           200: "#343a40",
           300: "#495057",
-          
+        },
+        custom: {
+          DEFAULT: "#ffffff",
+          100: "",
+          200: "",
         },
       },
+
       fontFamily: {
         //Poppins
         pthin: ["Poppins-Thin", "sans-serif"],

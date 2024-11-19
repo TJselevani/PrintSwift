@@ -5,9 +5,12 @@ import ThermalPrinter from 'react-native-thermal-printer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { PrinterDevice } from '../constants/types'; 
 import { Link } from 'expo-router';
+import SafeAreaWithStatusBar from '@/components/SafeAreaView';
+import { useTheme } from '@/components/MyThemeProvider';
 // import BluetoothStateManager from 'react-native-bluetooth-state-manager';
 
 const PrinterSettingsScreen: React.FC = () => {
+  const { theme } = useTheme(); 
   const [printers, setPrinters] = useState<PrinterDevice[]>([]);
   const [selectedPrinter, setSelectedPrinter] = useState<string | null>(null);
 
@@ -53,16 +56,18 @@ const PrinterSettingsScreen: React.FC = () => {
     }
   };
 
+  const themedTextStyle = theme === 'dark' ? 'color-white' : 'color-black';
+
   return (
-    <SafeAreaView className="flex-1 bg-primary p-4">
+    <SafeAreaWithStatusBar>
       {/* <Text className="text-4xl font-bold text-center mb-4 color-gray-200">Available Printers</Text> */}
-      <StatusBar barStyle="light-content" />
+    
       <View className="flex-row justify-between items-center mt-6 mb-10">
         <Text></Text>
-        <Text className="text-3xl color-white font-pextrabold">Available Printers</Text>
+        <Text className={`text-3xl ${themedTextStyle} font-pextrabold`}>Available Printers</Text>
         <Link href="/" asChild>
           <TouchableOpacity>
-            <Ionicons name="receipt-outline" size={28} color="white" />
+            <Ionicons name="receipt-outline" size={28} color={theme === 'dark' ? '#ffffff' : '#121212'} />
           </TouchableOpacity>
         </Link>
       </View>
@@ -98,7 +103,7 @@ const PrinterSettingsScreen: React.FC = () => {
           </View>
         }
       />
-    </SafeAreaView>
+    </SafeAreaWithStatusBar>
   );
 };
 
