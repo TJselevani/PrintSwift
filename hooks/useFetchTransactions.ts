@@ -11,14 +11,18 @@ const fetchTransactions = async () => {
 };
 
 const useFetchTransactions = () => {
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['transactions'],
     queryFn: fetchTransactions,
+    // Add stale time to control refetching behavior (optional)
+    staleTime: Infinity,
   });
 
-  const transactions = data ? data.map((item: any) => Transaction.fromJson(item)) : [];
+  const transactions = data
+    ? data.map((item: any) => Transaction.fromJson(item))
+    : [];
 
-  return { transactions, isLoading, error };
+  return { transactions, isLoading, error, refetch }; // Return refetch function
 };
 
 export default useFetchTransactions;

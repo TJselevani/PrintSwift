@@ -1,20 +1,22 @@
 {
-    "cSpell.words": [
-        "appicon",
-        "Ionicons",
-        "myapp",
-        "nativewind",
-        "pblack",
-        "pbold",
-        "pextrabold",
-        "pextralight",
-        "playstore",
-        "pmedium",
-        "pregular",
-        "psemibold",
-        "pthin",
-        "tailwindcss",
-        "tanstack"
-    ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+  "cSpell.words": [
+    "appicon",
+    "Ionicons",
+    "myapp",
+    "nativewind",
+    "pblack",
+    "pbold",
+    "pextrabold",
+    "pextralight",
+    "playstore",
+    "pmedium",
+    "pregular",
+    "psemibold",
+    "pthin",
+    "Swipeable",
+    "tailwindcss",
+    "tanstack"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic"
 }

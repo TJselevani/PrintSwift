@@ -16,7 +16,7 @@ const SafeAreaWithStatusBar: React.FC<SafeAreaWithStatusBarProps> = ({
   const statusBarStyle = theme === 'dark' ? 'light-content' : 'dark-content';
 
   return (
-    <SafeAreaView className={`flex-1 p-4 ${backgroundColorClass}`}>
+    <SafeAreaView className={`flex-1 mt-4 p-4 ${backgroundColorClass}`}>
       <StatusBar
         barStyle={statusBarStyle}
         backgroundColor={theme === 'dark' ? '#121212' : '#ffffff'} // Example dark/light background colors

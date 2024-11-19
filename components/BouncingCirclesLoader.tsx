@@ -3,61 +3,70 @@ import { View, StyleSheet } from 'react-native';
 import Svg, { Rect, Circle } from 'react-native-svg';
 import Animated, {
   useSharedValue,
-  useAnimatedStyle,
+  useAnimatedProps,
   withRepeat,
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
 
+// Create an animated version of the Circle component
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
 const BouncingCirclesLoader: React.FC = () => {
-  const circle1X = useSharedValue(0);
-  const circle2X = useSharedValue(0);
+  const circle1Y = useSharedValue(30);
+  const circle2Y = useSharedValue(70);
 
   // Animation logic for the circles
   useEffect(() => {
-    circle1X.value = withRepeat(
+    circle1Y.value = withRepeat(
       withSequence(
-        withTiming(-50, { duration: 500 }),
-        withTiming(0, { duration: 500 })
+        withTiming(10, { duration: 500 }), // Move up
+        withTiming(30, { duration: 500 }) // Move back down
       ),
       -1,
       false
     );
 
-    circle2X.value = withRepeat(
+    circle2Y.value = withRepeat(
       withSequence(
-        withTiming(50, { duration: 500 }),
-        withTiming(0, { duration: 500 })
+        withTiming(90, { duration: 500 }), // Move up
+        withTiming(70, { duration: 500 }) // Move back down
       ),
       -1,
       false
     );
-  }, [circle1X, circle2X]);
+  }, [circle1Y, circle2Y]);
 
-  // Animated styles for the circles
-  const circle1Style = useAnimatedStyle(() => ({
-    transform: [{ translateX: circle1X.value }],
+  // Animated props for the circles
+  const animatedCircle1Props = useAnimatedProps(() => ({
+    cy: circle1Y.value,
   }));
 
-  const circle2Style = useAnimatedStyle(() => ({
-    transform: [{ translateX: circle2X.value }],
+  const animatedCircle2Props = useAnimatedProps(() => ({
+    cy: circle2Y.value,
   }));
 
   return (
     <View style={styles.container}>
       <Svg width="100" height="100" viewBox="0 0 100 100">
         {/* Rectangular block */}
-        <Rect x="10" y="20" width="20" height="60" fill="#4A4A4A" />
+        <Rect x="10" y="20" width="20" height="60" fill="#245501" />
 
         {/* First bouncing circle */}
-        <Animated.View style={[styles.circle, circle1Style]}>
-          <Circle cx="70" cy="30" r="10" fill="#4A4A4A" />
-        </Animated.View>
+        <AnimatedCircle
+          cx="70"
+          animatedProps={animatedCircle1Props}
+          r="10"
+          fill="#245501"
+        />
 
         {/* Second bouncing circle */}
-        <Animated.View style={[styles.circle, circle2Style]}>
-          <Circle cx="70" cy="70" r="10" fill="#4A4A4A" />
-        </Animated.View>
+        <AnimatedCircle
+          cx="70"
+          animatedProps={animatedCircle2Props}
+          r="10"
+          fill="#245501"
+        />
       </Svg>
     </View>
   );
@@ -69,9 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-  },
-  circle: {
-    position: 'absolute',
+    padding: 10,
   },
 });
 
