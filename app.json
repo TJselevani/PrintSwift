@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "printswift",
     "name": "PrintSwift",
     "slug": "PrintSwift",
     "version": "1.0.0",

@@ -77,10 +77,12 @@ const styles = StyleSheet.create({
   header: {
     height: 250,
     overflow: 'hidden',
+    borderRadius: 20,
   },
   content: {
     flex: 1,
-    padding: 32,
+    paddingVertical: 20,
+    paddingHorizontal: 5,
     gap: 16,
     overflow: 'hidden',
   },

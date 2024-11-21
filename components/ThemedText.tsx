@@ -19,7 +19,7 @@ export function ThemedText({
 
   // Determine the dynamic text color class
   const textColorClass =
-    theme === 'dark' ? 'text-dark-text' : 'text-light-text';
+    theme === 'dark' ? 'text-white' : 'color-black';
 
   // Map types to Tailwind class names
   const typeClass = (() => {

@@ -13,15 +13,25 @@ import Animated, {
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const BouncingCirclesLoader: React.FC = () => {
+  // Golden ratio
+  const goldenRatio = 1.618;
+
+  // Define sizes based on golden ratio
+  const circleRadius = 12; // Base radius
+  const rectangleWidth = circleRadius * goldenRatio; // Rectangle width according to golden ratio
+  const rectangleHeight = circleRadius * 5; // Rectangle height
+
   const circle1Y = useSharedValue(30);
   const circle2Y = useSharedValue(70);
 
   // Animation logic for the circles
   useEffect(() => {
+    const durationFactor = circleRadius / 10; // Adjust timing based on radius
+
     circle1Y.value = withRepeat(
       withSequence(
-        withTiming(10, { duration: 500 }), // Move up
-        withTiming(30, { duration: 500 }) // Move back down
+        withTiming(20, { duration: durationFactor * 500 }), // Move up
+        withTiming(30, { duration: durationFactor * 500 }) // Move back down
       ),
       -1,
       false
@@ -29,8 +39,8 @@ const BouncingCirclesLoader: React.FC = () => {
 
     circle2Y.value = withRepeat(
       withSequence(
-        withTiming(90, { duration: 500 }), // Move up
-        withTiming(70, { duration: 500 }) // Move back down
+        withTiming(80, { duration: durationFactor * 500 }), // Move up
+        withTiming(70, { duration: durationFactor * 500 }) // Move back down
       ),
       -1,
       false
@@ -50,21 +60,27 @@ const BouncingCirclesLoader: React.FC = () => {
     <View style={styles.container}>
       <Svg width="100" height="100" viewBox="0 0 100 100">
         {/* Rectangular block */}
-        <Rect x="10" y="20" width="20" height="60" fill="#245501" />
+        <Rect
+          x="10"
+          y="20"
+          width={rectangleWidth}
+          height={rectangleHeight}
+          fill="#245501"
+        />
 
         {/* First bouncing circle */}
         <AnimatedCircle
-          cx="70"
+          cx="50"
           animatedProps={animatedCircle1Props}
-          r="10"
+          r={circleRadius}
           fill="#245501"
         />
 
         {/* Second bouncing circle */}
         <AnimatedCircle
-          cx="70"
+          cx="50"
           animatedProps={animatedCircle2Props}
-          r="10"
+          r={circleRadius}
           fill="#245501"
         />
       </Svg>
