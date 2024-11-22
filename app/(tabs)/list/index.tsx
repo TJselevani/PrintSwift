@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   RefreshControl,
+  Button,
 } from 'react-native';
 import { Link } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -34,6 +35,11 @@ const TransactionsListScreen: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
+  // Function to handle refresh
+  const handleRefresh = () => {
+    refetch(); // Trigger a refetch of transactions
+  };
+
   // State to manage visibility of navigation buttons
   const [showButtons, setShowButtons] = useState(false);
 
@@ -52,8 +58,7 @@ const TransactionsListScreen: React.FC = () => {
   const textStyle = theme === 'dark' ? 'text-white' : 'color-black';
 
   const renderTransaction = ({ item }: { item: Transaction }) => (
-    // href={`/transaction/${item.transaction_id}`}
-    <Link href="/(tabs)/home" asChild>
+    <Link href={`/transaction/${item.transaction_id}`} asChild>
       <TouchableOpacity className="w-full">
         <View
           className={`${containerStyle} px-1 py-1 mb-5 flex-row w-full rounded-2xl`}
@@ -99,7 +104,36 @@ const TransactionsListScreen: React.FC = () => {
       <SafeAreaWithStatusBar>
         <AppBar title="Transactions" />
         <View className="flex-1 justify-center items-center">
-          <Text className="color-red-600">Error: {error.message}</Text>
+          <Text className="text-lg color-red-600">Error: {error.message}</Text>
+        </View>
+        <View className="mt-4 p-5">
+          <Button title="Retry" onPress={handleRefresh} color="#FF9C01" />
+        </View>
+      </SafeAreaWithStatusBar>
+    );
+  }
+
+  if (!transactions) {
+    return (
+      <SafeAreaWithStatusBar>
+        <View className="flex-row justify-between items-center mt-6 mb-10">
+          <Text></Text>
+          <Text
+            className={`text-3xl ${theme === 'dark' ? 'color-white' : 'color-black'} font-pextrabold`}
+          >
+            Transaction Details
+          </Text>
+          <Text></Text>
+        </View>
+
+        <View className="flex-1 justify-center items-center">
+          <Text className="text-center mt-10 text-lg text-gray-500 font-pregular">
+            Transactions not found
+          </Text>
+        </View>
+
+        <View className="mt-4 p-5">
+          <Button title="Retry" onPress={handleRefresh} color="#FF9C01" />
         </View>
       </SafeAreaWithStatusBar>
     );

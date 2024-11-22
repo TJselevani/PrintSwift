@@ -24,7 +24,7 @@ export default function TabsLayout() {
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string}) => (
             <FontAwesome name="home" size={28} color={color} />
           ),
         }}
@@ -33,7 +33,7 @@ export default function TabsLayout() {
         name="list"
         options={{
           title: 'transactions',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string}) => (
             <FontAwesome name="cog" size={28} color={color} />
           ),
         }}

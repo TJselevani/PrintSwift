@@ -5,9 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
-  StatusBar,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import ThermalPrinter from 'react-native-thermal-printer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';

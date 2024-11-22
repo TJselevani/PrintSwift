@@ -27,16 +27,24 @@ const SwipeableTabs: React.FC<SwipeableTabsProps> = ({ children }) => {
       translateX.value = event.translationX; // Update translation based on gesture
     })
     .onEnd((event) => {
-      if (event.translationX < -50 && activeIndex < children.length - 1) {
-        setActiveIndex(activeIndex + 1);
-      } else if (event.translationX > 50 && activeIndex > 0) {
-        setActiveIndex(activeIndex - 1);
+      const newIndex =
+        event.translationX < -50
+          ? activeIndex + 1
+          : event.translationX > 50
+            ? activeIndex - 1
+            : activeIndex;
+
+      // Ensure newIndex is within bounds
+      if (newIndex >= 0 && newIndex < children.length) {
+        setActiveIndex(newIndex); // Update state outside of worklet
       }
+
       translateX.value = withSpring(0); // Reset position with spring animation
     });
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: -activeIndex * width }],
+    width: `${children.length * 100}%`, // Set total width based on number of children
   }));
 
   return (
@@ -44,7 +52,7 @@ const SwipeableTabs: React.FC<SwipeableTabsProps> = ({ children }) => {
       <GestureDetector gesture={panGesture}>
         <Animated.View style={[styles.tabContainer, animatedStyle]}>
           {children.map((child, index) => (
-            <View key={index} style={[styles.tabContent, { width }]}>
+            <View key={index} style={styles.tabContent}>
               {child}
             </View>
           ))}
@@ -71,15 +79,17 @@ const SwipeableTabs: React.FC<SwipeableTabsProps> = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff', // Ensure a visible background
   },
   tabContainer: {
     flexDirection: 'row',
-    width: '100%',
+    // Width will be set dynamically in animatedStyle
   },
   tabContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    width: width, // Ensure each tab takes full screen width
+    backgroundColor: '#f0f0f0', // Background color for each tab
   },
   tabIndicator: {
     flexDirection: 'row',

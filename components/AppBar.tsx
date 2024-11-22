@@ -7,9 +7,14 @@ import { ThemedText } from './ThemedText';
 interface AppBarProps {
   title: string;
   rowItems?: React.ReactNode;
+  showIcon?: boolean;
 }
 
-const AppBar: React.FC<AppBarProps> = ({ title, rowItems }) => {
+const AppBar: React.FC<AppBarProps> = ({
+  title,
+  rowItems,
+  showIcon = false,
+}) => {
   const { theme, toggleTheme } = useTheme(); // Access the current theme and toggle function
 
   return (
@@ -27,11 +32,13 @@ const AppBar: React.FC<AppBarProps> = ({ title, rowItems }) => {
         accessible
         accessibilityLabel="Toggle theme"
       >
-        <Ionicons
-          name={theme === 'dark' ? 'sunny-outline' : 'moon-outline'}
-          size={28}
-          color={theme === 'dark' ? 'white' : 'black'}
-        />
+        {showIcon && (
+          <Ionicons
+            name={theme === 'dark' ? 'sunny-outline' : 'moon-outline'}
+            size={28}
+            color={theme === 'dark' ? 'white' : 'black'}
+          />
+        )}
       </TouchableOpacity>
       <ThemedText
         className="font-pextrabold"
